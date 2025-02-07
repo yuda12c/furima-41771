@@ -11,12 +11,11 @@
 |name     | string |null: false|
 |surname_kana | string |null: false|
 |name_kana | string |null: false|
-|birthday | integer   |null: false|
+|birthday | date   |null: false|
 
 ### Association
 - has_many :items
 - has_many :buys
-- has_many :informations
 
 
 ## Items(商品情報)テーブル
@@ -44,13 +43,14 @@
 
 |Column          |Type        |Options|
 |---------------|------------|-------|
-|user_id        | references |null: false, foreign_key: true|
-|item_id        | references |null: false, foreign_key: true|
+|user  | references |null: false, foreign_key: true|
+|item  | references |null: false, foreign_key: true|
 
 ### Association
 
 - belongs_to :user
-- belomgs_to :item
+- belongs_to :item
+- belongs_to :information
 
 
 ## Informations(発送先情報)テーブル
@@ -58,7 +58,7 @@
 |Column        |Type        |Options|
 |-------------|------------|-------|
 |postal_code  | string     |null: false|
-|price        | integer |null: false|
+|place_id     | integer    |null: false|
 |city         | string     |null: false|
 |address      | string     |null: false|
 |building     | string     |           |
