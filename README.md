@@ -50,7 +50,7 @@
 
 - belongs_to :user
 - belongs_to :item
-- belongs_to :information
+- has_one :information
 
 
 ## Informations(発送先情報)テーブル
