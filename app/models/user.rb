@@ -6,15 +6,14 @@ class User < ApplicationRecord
 
 
      validates :nickname,       presence: true
-     validates :email,          presence: true
-     validates :password,       presence: true,format: { with: /\A(?=.*[a-zA-Z])(?=.*\d)[a-zA-Z\d]+\z/}
+     validates :password,       format: { with: /\A(?=.*[a-zA-Z])(?=.*\d)[a-zA-Z\d]+\z/}
      validates :surname,        presence: true,format: { with: /\A[ぁ-んァ-ヶ一-龠々ー]+\z/}
      validates :name,           presence: true,format: { with: /\A[ぁ-んァ-ヶ一-龠々ー]+\z/}
      validates :surname_kana,   presence: true,format: { with: /\A[ァ-ヶー]+\z/}
      validates :name_kana,      presence: true,format: { with: /\A[ァ-ヶー]+\z/}
      validates :birthday,       presence: true
 
-     has_many :items
-     has_many :buys
+    #  has_many :items
+    #  has_many :buys
 end
 
