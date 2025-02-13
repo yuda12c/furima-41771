@@ -28,7 +28,7 @@
 |state_id     | integer |null: false|
 |delivery_id  | integer |null: false|
 |place_id     | integer |null: false|
-|dispatch_day_id | integer |null: false|
+|dispatchday_id | integer |null: false|
 |price        | integer |null: false|
 |user         | references |null: false, foreign_key: true|
 
