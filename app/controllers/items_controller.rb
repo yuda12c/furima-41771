@@ -1,4 +1,5 @@
-class ItemsController < ApplicationController 
+class ItemsController < ApplicationController
+  before_action :authenticate_user!, only: [:new, :create]
 
   def index
   end 
@@ -10,16 +11,16 @@ class ItemsController < ApplicationController
   def create
     @item = Item.new(item_params)
     if @item.save
-      redirect_to @item 
+      redirect_to root_path
     else
-      render :new, status: :unprocessable_entity
+      render :new
     end
   end
 
 private
 
   def item_params
-    params.require(:item).permit(:title, :price, :image, :category_id, :status_id, :delivery_id, :place_id, :dispatchday_id)
+    params.require(:item).permit(:title, :detail, :price, :image, :category_id, :state_id, :delivery_id, :place_id, :dispatch_id)
   end
   
 end
