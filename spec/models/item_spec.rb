@@ -32,33 +32,33 @@ RSpec.describe Item, type: :model do
       end
 
       it 'category_idが空では出品できない' do
-        @item.category_id = nil
+        @item.category_id = 1
         @item.valid?
-        expect(@item.errors.full_messages).to include("Category can't be blank")
+        expect(@item.errors.full_messages).to include("Category を選択してください")
       end
 
       it 'state_idが空では出品できない' do
-        @item.state_id = nil
+        @item.state_id = 1
         @item.valid?
-        expect(@item.errors.full_messages).to include("State can't be blank")
+        expect(@item.errors.full_messages).to include("State を選択してください")
       end
 
       it 'delivery_idが空では出品できない' do
-        @item.delivery_id = nil
+        @item.delivery_id = 1
         @item.valid?
-        expect(@item.errors.full_messages).to include("Delivery can't be blank")
+        expect(@item.errors.full_messages).to include("Delivery を選択してください")
       end
 
       it 'place_idが空では出品できない' do
-        @item.place_id = nil
+        @item.place_id = 1
         @item.valid?
-        expect(@item.errors.full_messages).to include("Place can't be blank")
+        expect(@item.errors.full_messages).to include("Place を選択してください")
       end
 
       it 'dispatch_idが空では出品できない' do
-        @item.dispatch_id = nil
+        @item.dispatch_id = 1
         @item.valid?
-        expect(@item.errors.full_messages).to include("Dispatch can't be blank")
+        expect(@item.errors.full_messages).to include("Dispatch を選択してください")
       end
 
       it 'priceが空では出品できない' do
