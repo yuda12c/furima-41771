@@ -86,19 +86,9 @@ RSpec.describe Item, type: :model do
       end
 
       it 'userが紐付いていないと出品できない' do
-        item = Item.new(
-        title: 'Sample Title',
-        detail: 'Sample Detail',
-        category_id: 2,
-        state_id: 2,
-        delivery_id: 2,
-        place_id: 2,
-        dispatch_id: 2,
-        price: 1000,
-        image: Rack::Test::UploadedFile.new(Rails.root.join('spec/fixtures/files/test_image.png'), 'image/png')
-      )
-      item.valid?
-      expect(item.errors[:user]).to include('を入力してください')
+        @item.user = nil
+        @item.valid?
+        expect(@item.errors.full_messages).to include('User must exist')
       end 
 
     end
