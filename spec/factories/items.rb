@@ -9,6 +9,7 @@ FactoryBot.define do
     dispatch_id { 2 }
     price { 1000 }
     image { Rack::Test::UploadedFile.new(Rails.root.join('spec/fixtures/files/test_image.png'), 'image/png') }
-    # その他の属性
+    
+    association :user
   end
 end

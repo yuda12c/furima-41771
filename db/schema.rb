@@ -55,6 +55,8 @@ ActiveRecord::Schema[7.1].define(version: 2025_02_16_051948) do
     t.integer "price", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.bigint "user_id", null: false
+    t.index ["user_id"], name: "index_items_on_user_id"
   end
 
   create_table "users", charset: "utf8mb3", force: :cascade do |t|
