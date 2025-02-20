@@ -130,7 +130,7 @@
        <% if @items.present? %>
         <% @items.each do |item| %>
         <li class='list'>
-        <%= link_to "#" do %>
+        <%= link_to item_path(item) do %>
         <div class='item-img-content'>
           <%= image_tag item.image.attached? ? url_for(item.image) : "item-sample.png", class: "item-img" %>
 
@@ -156,13 +156,13 @@
             </div>
           </div>
         </div>
-        <% end %>
       </li>
+     <% end %>
     <% end %>
 
       <% if @items.empty? %> 
       <li class='list'>
-        <%= link_to '#' do %>
+        <%= link_to item_path do %>
         <%= image_tag "https://tech-master.s3.amazonaws.com/uploads/curriculums/images/Rails1-4/sample.jpg", class: "item-img" %>
         <div class='item-info'>
           <h3 class='item-name'>
