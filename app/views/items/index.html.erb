@@ -127,10 +127,10 @@
       新規投稿商品
     </div>
     <ul class='item-lists'>
-
        <% if @items.present? %>
         <% @items.each do |item| %>
         <li class='list'>
+        <%= link_to "#" do %>
         <div class='item-img-content'>
           <%= image_tag item.image.attached? ? url_for(item.image) : "item-sample.png", class: "item-img" %>
 
@@ -139,7 +139,7 @@
               <%# <div class='sold-out'>
                 <span>Sold Out!!</span>
               </div> %>
-            <%# end %> 
+            <% end %> 
           </div>
           <%# //商品が売れていればsold outを表示しましょう %>
 
