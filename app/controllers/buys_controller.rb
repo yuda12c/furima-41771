@@ -8,9 +8,8 @@ class BuysController < ApplicationController
 
   def create
     @buy_information = BuyInformation.new(buy_information_params)
-    if @buy_information.valid?
-      pay_item
-      @buy_information.save
+
+    if @buy_information.save
       redirect_to root_path
     else
       render :index
@@ -20,7 +19,7 @@ class BuysController < ApplicationController
   private
 
   def buy_information_params
-    params.require(:buy_information).permit(:postal_code, :place_id, :city, :address, :building, :phone_number).merge(user_id: current_user.id, item_id: params[:item_id], token: params[:token])
+    params.require(:buy_information).permit(:postal_code, :place_id, :city, :address, :building, :phone_number).merge(user_id: current_user.id, item_id: params[:item_id])
   end
 
   def set_item
