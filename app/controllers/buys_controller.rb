@@ -7,7 +7,7 @@ class BuysController < ApplicationController
   end
 
   def create
-    @buy_information = BuyInformation.new(information_params)
+    @buy_information = BuyInformation.new(buy_information_params)
     if @buy_information.valid?
       pay_item
       @buy_information.save
@@ -19,7 +19,7 @@ class BuysController < ApplicationController
 
   private
 
-  def donation_params
+  def buy_information_params
     params.require(:buy_information).permit(:postal_code, :place_id, :city, :address, :building, :phone_number).merge(user_id: current_user.id, item_id: params[:item_id], token: params[:token])
   end
 
