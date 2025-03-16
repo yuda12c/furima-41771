@@ -73,6 +73,12 @@ RSpec.describe BuyInformation, type: :model do
         @buy_information.phone_number = invalid_number
         expect(@buy_information).not_to be_valid
       end
+
+    it "tokenが空では登録できないこと" do
+       @order.token = nil
+       @order.valid?
+       expect(@order.errors.full_messages).to include("Token can't be blank")
+     end
     end
   end
  end

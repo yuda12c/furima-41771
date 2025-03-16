@@ -8,6 +8,7 @@ class BuyInformation
     validates :city 
     validates :address
     validates :phone_number, format: { with: /\A\d{10,11}\z/, message: 'is invalid. Enter only numbers (10-11 digits)' }
+    validates :token, presence: true
   end
 
   def save
