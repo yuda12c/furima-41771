@@ -5,6 +5,7 @@ class BuysController < ApplicationController
   before_action :redirect_if_owner
 
   def index
+    gon.public_key = ENV["PAYJP_PUBLIC_KEY"]
     @buy_information = BuyInformation.new
   end
 
