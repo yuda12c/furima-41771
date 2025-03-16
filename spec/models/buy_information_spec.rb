@@ -3,7 +3,7 @@ require 'rails_helper'
 RSpec.describe BuyInformation, type: :model do
   before do
     user = FactoryBot.create(:user)
-    item = FactoryBot.create(:item, user: user)
+    item = FactoryBot.create(:item)
     @buy_information = FactoryBot.build(:buy_information,user_id: user.id, item_id: item.id)
   end
 
@@ -19,6 +19,19 @@ RSpec.describe BuyInformation, type: :model do
   end
 
   context '無効な場合' do
+
+    it 'user_idが空では購入できない' do
+      @buy_information.user_id = nil
+      @buy_information.valid?
+      expect(@buy_information.errors.full_messages).to include("User can't be blank")
+    end
+
+    it 'item_idが空では購入できない' do
+      @buy_information.item_id = nil
+      @buy_information.valid?
+      expect(@buy_information.errors.full_messages).to include("Item can't be blank")
+    end
+
     it '郵便番号が空では無効' do
       @buy_information.postal_code = nil
       expect(@buy_information).not_to be_valid
@@ -33,7 +46,7 @@ RSpec.describe BuyInformation, type: :model do
     end
 
     it '都道府県が空では無効' do
-      @buy_information.place_id = nil
+      @buy_information.place_id = 1
       expect(@buy_information).not_to be_valid
     end
 
