@@ -1,6 +1,7 @@
 class BuysController < ApplicationController
   before_action :authenticate_user!
   before_action :set_item
+  before_action :redirect_if_sold
   before_action :redirect_if_owner
 
   def index
@@ -9,6 +10,8 @@ class BuysController < ApplicationController
 
   def create
     @buy_information = BuyInformation.new(buy_information_params)
+ 
+    if @buy_information.valid?
     item = Item.find(buy_information_params[:item_id]) 
     price = item.price
 
@@ -20,7 +23,7 @@ class BuysController < ApplicationController
       )
 
 
-    if @buy_information.save
+      @buy_information.save
       redirect_to root_path
     else
       render :index
@@ -37,12 +40,16 @@ class BuysController < ApplicationController
     @item = Item.find(params[:item_id])
   end
 
-  def redirect_if_sold_out
-    redirect_to root_path if @item.buy.present?
+  def redirect_if_sold
+    if @item.buy.present?
+      redirect_to root_path
+    end
   end
 
   def redirect_if_owner
     if @item.user == current_user  
       redirect_to root_path
     end
+  end
+
 end

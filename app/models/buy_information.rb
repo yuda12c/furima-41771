@@ -8,10 +8,12 @@ class BuyInformation
     validates :city 
     validates :address
     validates :phone_number, format: { with: /\A\d{10,11}\z/, message: 'is invalid. Enter only numbers (10-11 digits)' }
-    validates :token, presence: true
+    validates :token
   end
 
   def save
+    return false unless valid?
+
     buy = Buy.create(user_id: user_id, item_id: item_id)
     information = Information.create(postal_code: postal_code, place_id: place_id, city: city, address: address, building: building, phone_number: phone_number)
   end

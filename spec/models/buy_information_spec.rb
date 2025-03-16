@@ -4,7 +4,7 @@ RSpec.describe BuyInformation, type: :model do
   before do
     user = FactoryBot.create(:user)
     item = FactoryBot.create(:item, user: user)
-    @buy_information = FactoryBot.build(:buy_information)
+    @buy_information = FactoryBot.build(:buy_information,user_id: user.id, item_id: item.id)
   end
 
   context '有効な場合' do
@@ -73,12 +73,12 @@ RSpec.describe BuyInformation, type: :model do
         @buy_information.phone_number = invalid_number
         expect(@buy_information).not_to be_valid
       end
+    end
 
-    it "tokenが空では登録できないこと" do
-       @order.token = nil
-       @order.valid?
-       expect(@order.errors.full_messages).to include("Token can't be blank")
+    it 'tokenが空では登録できないこと' do
+       @buy_information.token = nil
+       @buy_information.valid?
+       expect(@buy_information.errors.full_messages).to include("Token can't be blank")
      end
     end
   end
- end
