@@ -7,6 +7,7 @@ RSpec.describe BuyInformation, type: :model do
     @buy_information = FactoryBot.build(:buy_information,user_id: user.id, item_id: item.id)
   end
 
+describe '購入情報の保存' do
   context '有効な場合' do
     it 'すべての必須項目が適切に入力されていれば有効' do
       expect(@buy_information).to be_valid
@@ -19,7 +20,6 @@ RSpec.describe BuyInformation, type: :model do
   end
 
   context '無効な場合' do
-
     it 'user_idが空では購入できない' do
       @buy_information.user_id = nil
       @buy_information.valid?
@@ -34,6 +34,7 @@ RSpec.describe BuyInformation, type: :model do
 
     it '郵便番号が空では無効' do
       @buy_information.postal_code = nil
+      @buy_information.valid?
       expect(@buy_information).not_to be_valid
     end
 
@@ -41,42 +42,50 @@ RSpec.describe BuyInformation, type: :model do
       invalid_postal_codes = ['1234567', '１２３-４５６７', '123-456', '1234-567']
       invalid_postal_codes.each do |invalid_code|
         @buy_information.postal_code = invalid_code
+        @buy_information.valid?
         expect(@buy_information).not_to be_valid
       end
     end
 
     it '都道府県が空では無効' do
       @buy_information.place_id = 1
+      @buy_information.valid?
       expect(@buy_information).not_to be_valid
     end
 
     it '市区町村が空では無効' do
       @buy_information.city = nil
+      @buy_information.valid?
       expect(@buy_information).not_to be_valid
     end
 
     it '番地が空では無効' do
       @buy_information.address = nil
+      @buy_information.valid?
       expect(@buy_information).not_to be_valid
     end
 
     it '電話番号が空では無効' do
       @buy_information.phone_number = nil
+      @buy_information.valid?
       expect(@buy_information).not_to be_valid
     end
 
     it '電話番号が10桁未満では無効' do
       @buy_information.phone_number = '090123456'
+      @buy_information.valid?
       expect(@buy_information).not_to be_valid
     end
 
     it '電話番号が11桁を超えると無効' do
       @buy_information.phone_number = '090123456789'
+      @buy_information.valid?
       expect(@buy_information).not_to be_valid
     end
 
     it '電話番号にハイフンが含まれると無効' do
       @buy_information.phone_number = '090-1234-5678'
+      @buy_information.valid?
       expect(@buy_information).not_to be_valid
     end
 
@@ -84,6 +93,7 @@ RSpec.describe BuyInformation, type: :model do
       invalid_phone_numbers = ['０９０１２３４５６７８', 'abc12345678', '090 1234 5678']
       invalid_phone_numbers.each do |invalid_number|
         @buy_information.phone_number = invalid_number
+        @buy_information.valid?
         expect(@buy_information).not_to be_valid
       end
     end
@@ -95,3 +105,4 @@ RSpec.describe BuyInformation, type: :model do
      end
     end
   end
+end
